@@ -1,4 +1,5 @@
 import React from 'react';
+import CollectionItem from '../CollectionItem';
 import './styles.scss';
 
 function CollectionPreview({ title, items }) {
@@ -6,9 +7,9 @@ function CollectionPreview({ title, items }) {
         <div className="collection-preview">
             <h1 className="title">{title}</h1>
             <div className="preview" >
-                {items.slice(0, 4).map(({ id, name }) => {
+                {items.slice(0, 4).map(({ id, name, imageUrl, price }) => {
                     return (
-                        <div key={id}>{name}</div>
+                        <CollectionItem key={id} name={name} imageUrl={imageUrl} price={price} />
                     );
                 })}
             </div>
