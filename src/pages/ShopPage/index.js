@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import CollectionPreview from '../../components/CollectionPreview';
 import { Collections } from './Collections';
 
