@@ -5,6 +5,8 @@ import './styles.scss';
 import CustomButton from '../CustomButton';
 import FormInput from '../FormInput';
 
+import { signInWithGoogle } from '../../firebase';
+
 function SignIn() {
     const [userInput, setUserInput] = useState({ email: '', password: '' })
 
@@ -42,6 +44,7 @@ function SignIn() {
                 />
 
                 <CustomButton type="submit"> SIGN IN </CustomButton>
+                <CustomButton onClick={signInWithGoogle}> SIGN IN WITH GOOGLE</CustomButton>
 
             </form>
         </div>
