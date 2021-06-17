@@ -17,7 +17,7 @@ function SignIn() {
 
     function handleChange(event) {
         const { value, name } = event.target;
-        setUserInput({ [name]: value });
+        setUserInput({ ...userInput, [name]: value });
     }
 
     return (
@@ -29,16 +29,16 @@ function SignIn() {
                 <FormInput
                     type="email"
                     name="email"
-                    value={userInput.email}
                     handleChange={handleChange}
+                    value={userInput.email}
                     label="Email"
                     required
                 />
                 <FormInput
                     type="password"
                     name="password"
-                    value={userInput.password}
                     handleChange={handleChange}
+                    value={userInput.password}
                     label="Password"
                     required
                 />

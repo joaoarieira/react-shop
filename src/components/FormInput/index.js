@@ -9,7 +9,7 @@ function FormInput({ handleChange, label, ...otherProps }) {
             {label ? (
                 /* aplica a classe shrink à tag label apenas se houver alguma
                 entrada na tag de input do email ou da senha, etc.*/
-                <label className={`${otherProps.value.length ? "shrink" : ""} form-input-label`}>
+                <label className={`${otherProps.value?.length ? "shrink" : ""} form-input-label`}>
                     {label}
                 </label>
             ) : null}
