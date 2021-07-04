@@ -40,7 +40,7 @@ function SignUp() {
             });
 
         } catch (error) {
-            console.log(error);
+            console.log('[POST]:', error);
         }
     }
 
@@ -83,7 +83,7 @@ function SignUp() {
                     type="password"
                     name="confirmPassword"
                     handleChange={handleChange}
-                    value={userInput.emaconfirmPasswordil}
+                    value={userInput.confirmPassword}
                     label="Confirm Password"
                     required
                 />

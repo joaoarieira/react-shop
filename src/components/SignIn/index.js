@@ -5,13 +5,23 @@ import './styles.scss';
 import CustomButton from '../CustomButton';
 import FormInput from '../FormInput';
 
-import { signInWithGoogle } from '../../firebase';
+import { auth, signInWithGoogle } from '../../firebase';
 
 function SignIn() {
     const [userInput, setUserInput] = useState({ email: '', password: '' })
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+
+        const { email, password } = userInput;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            setUserInput({ email: '', password: '' });
+        } catch (error) {
+            console.log(error);
+        }
+
         setUserInput({ email: '', password: '' });
     }
 

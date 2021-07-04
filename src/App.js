@@ -16,12 +16,13 @@ function App() {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          console.log(snapShot);
+
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
           });
         });
+        //console.log(currentUser);
       } else {
         setCurrentUser(userAuth);
       }
