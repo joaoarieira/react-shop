@@ -1,6 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+import CartIcon from '../../components/CartIcon';
+import CartDropdown from '../../components/CartDropdown';
 
 import { auth } from '../../firebase';
 
@@ -10,6 +12,7 @@ import './styles.scss';
 
 function Header() {
     const currentUser = useSelector(state => state.user.currentUser);
+    const isCartHidden = useSelector(state => state.cart.hidden);
 
     return (
         <div className="header">
@@ -41,8 +44,11 @@ function Header() {
                             SIGN IN
                         </Link>
                     }
+
+                    <CartIcon />
                 </div>
             </div>
+            {!isCartHidden && <CartDropdown />}
         </div>
     );
 }

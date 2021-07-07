@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import Header from './components/Header';
-import Routes from './routes';
+import { setCurrentUser } from './redux/user/userActions';
+
 import { auth, createUserProfileDocument } from './firebase';
 
 import './App.css';
-import { useDispatch } from 'react-redux';
-import { setCurrentUser } from './redux/user/userActions';
+
+import Header from './components/Header';
+import Routes from './routes';
+
 
 
 function App() {
