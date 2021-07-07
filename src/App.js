@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useEffect } from 'react';
 
 import Header from './components/Header';
 import Routes from './routes';
 import { auth, createUserProfileDocument } from './firebase';
 
 import './App.css';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from './redux/user/userActions';
+
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -16,13 +18,60 @@ function App() {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-
-          setCurrentUser({
+          const userData = {
             id: snapShot.id,
             ...snapShot.data()
-          });
+          }
+          dispatch(setCurrentUser(userData));
         });
-        //console.log(currentUser);
+
+      } else {
+        dispatch(setCurrentUser(userAuth));
+      }
+    });
+
+    return () => {
+      unsubscribeFromAuth();
+    }
+  }, [dispatch]);
+
+  return (
+    <>
+      <Header />
+      <Routes />
+    </>
+  );
+}
+
+export default App;
+
+/*
+import React, { useEffect } from 'react';
+
+import Header from './components/Header';
+import Routes from './routes';
+import { auth, createUserProfileDocument } from './firebase';
+
+import './App.css';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/userActions';
+
+
+function App({ setCurrentUser }) {
+
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          const userData = {
+            id: snapShot.id,
+            ...snapShot.data()
+          }
+          setCurrentUser(userData);
+        });
+
       } else {
         setCurrentUser(userAuth);
       }
@@ -31,14 +80,19 @@ function App() {
     return () => {
       unsubscribeFromAuth();
     }
-  }, []);
+  }, [setCurrentUser]);
 
   return (
-    <BrowserRouter>
-      <Header currentUser={currentUser} />
+    <>
+      <Header />
       <Routes />
-    </BrowserRouter>
+    </>
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);
+*/

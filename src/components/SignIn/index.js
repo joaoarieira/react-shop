@@ -19,7 +19,7 @@ function SignIn() {
             await auth.signInWithEmailAndPassword(email, password);
             setUserInput({ email: '', password: '' });
         } catch (error) {
-            console.log(error);
+            console.log('[GET]', error);
         }
 
         setUserInput({ email: '', password: '' });
@@ -58,7 +58,7 @@ function SignIn() {
                         SIGN IN
                     </CustomButton>
 
-                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+                    <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
                         SIGN IN WITH GOOGLE
                     </CustomButton>
                 </div>
